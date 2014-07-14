@@ -4,6 +4,7 @@
 # Our metalsmith build code.
 #
 path         = require 'path'
+highlightjs  = require 'highlight.js'
 metalsmith   = require 'metalsmith'
 collections  = require 'metalsmith-collections'
 excerpts     = require 'metalsmith-excerpts'
@@ -26,6 +27,10 @@ tags         = require './plugins/tags'
 titleify     = require './plugins/titleify'
 videoScraper = require './plugins/video-scraper'
 
+
+# Configure highlightjs with some language aliases
+highlightjs.registerLanguage 'coffee', (hljs) ->
+  hljs.getLanguage('coffeescript')
 
 
 # ## build
@@ -51,7 +56,10 @@ module.exports = build = (callback=->) ->
       '!**/*.md'
       ]
     .use markdown
-      highlight: (code) -> require('highlight.js').highlightAuto(code).value
+      langPrefix: ''
+      highlight: (code, lang) ->
+        lang = [lang] if lang?
+        highlightjs.highlightAuto(code, lang).value
     .use excerpts()
     .use titleify()
     .use moment()
