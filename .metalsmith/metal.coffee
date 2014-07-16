@@ -114,13 +114,18 @@ module.exports = build = (callback=->) ->
       collection: 'guide'
       output: 'guides'
       metadata: template: 'guides.toffee'
+    .use descMeta() # Add Description Metatag to each Document
     .use permalinks()
     .use filename()
     .use feed
       collections: ['guide', 'faq']
       output: 'rss.xml'
       metadata: template: 'feed.toffee'
-    .use descMeta() # Add Description Metatag to each Document
+    # foo
+    .use feed
+      collections: ['guide', 'faq']
+      output: 'sitemap.xml'
+      metadata: template: 'sitemap.toffee'
     .use templates 'toffee'
     .build callback
 
