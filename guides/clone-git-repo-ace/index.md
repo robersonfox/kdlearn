@@ -19,9 +19,13 @@ Open up the Ace editor. Make sure the VM you want to clone the repo into is turn
 
 On the right you'll see the file tree. Right click on a folder where you want the repo to reside. A menu will open. From that menu select `Clone a repo here`.
 
+![clone-git-repo-ace-001](clone-git-repo-ace-001.png)
+
 ## Step 3
 
 A modal window will pop-up. In this window you'll need to enter the repo URL and then click the `Clone` button (or press the Enter/Return key on your keyboard).
+
+![clone-git-repo-ace-002](clone-git-repo-ace-002.png)
 
 ## Step 4
 
