@@ -1,0 +1,53 @@
+/* Landscape phones and down */
+@media (max-width: 480px) {
+	header {
+		background: #5c656d;
+		h2 {
+			margin: 0;
+			font-size: 20px;
+		}
+		.container {
+			padding: 0;
+			line-height: 25px;
+		}
+	}
+	nav {
+		.topSearchButton {
+			margin: 15px 20px 15px 0 !important;
+			position: relative;
+			z-index: 20;
+		}
+		#menu {
+			.topLinks {
+				margin: 0;
+				padding: 18px;
+			}
+			li {
+				display: inline-block;
+				margin-right: 0;
+				width: 50%;
+				float: left;
+				margin-bottom: 5px;
+			}
+		}
+		.topSearchBox {
+			width: 280px;
+			margin-left: -140px;
+			top: 65px;
+			z-index: 10;
+			input {
+				padding: 5px 10px;
+			}
+		}
+	}
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 768px) { 
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 940px) { 
+
+}
