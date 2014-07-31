@@ -93,6 +93,9 @@ typing:
 
 If you're having trouble SSH-ing into your VM, after pasting your SSH key in the box described above, make sure there are **NO SPACES** in the key other than the one after ``ssh-rsa`` and one before your email address.
 
+## Important Note
+
+If you're having trouble SSH-ing into your VM, after pasting your SSH key in the box described above, make sure there are **NO SPACES** in the key other than the one after `ssh-rsa` and one before your email address.
 
 
 [koding]: https://koding.com
