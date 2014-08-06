@@ -39,15 +39,14 @@
 		<meta name="twitter:description" content="Koding: A robust and feature rich cloud-based development environment complete with free VMs, an attractive IDE and sudo level terminal access. Your ideal software development playground!"\>
 		<meta name="twitter:domain" content="learn.koding.com">
 
-	    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-	    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600,700" rel="stylesheet" type="text/css">
-	    <link href="http://fonts.googleapis.com/css?family=Ubuntu:700,300" rel="stylesheet" type="text/css">
-	    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-	    <link href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
-	    <link rel="stylesheet" href="/css/rwd.css" />
-	    <link rel="stylesheet" href="/css/rrssb.css" />
-	    <link rel="stylesheet" href="/css/style.css" />
-	    <link rel="stylesheet" href="/css/highlight-default.css" />
-	    <link rel="stylesheet" href="/css/highlight-theme.css" />
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu:700,300" rel="stylesheet" type="text/css">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/rrssb.css" />
+    <link rel="stylesheet" href="/css/style.css?3" />
+    <link rel="stylesheet" href="/css/highlight-default.css" />
+    <link rel="stylesheet" href="/css/highlight-theme.css" />
 	</head>
 	<body>
