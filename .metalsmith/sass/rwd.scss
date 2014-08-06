@@ -3,8 +3,8 @@
 	header {
 		background: #5c656d;
 		h2 {
-			margin: 0;
-			font-size: 20px;
+			margin: 0 !important;
+			font-size: 20px !important;
 		}
 		.container {
 			padding: 0;
@@ -13,30 +13,30 @@
 	}
 	nav {
 		.topSearchButton {
-			margin: 15px 20px 15px 0 !important;
+			margin: 5px 20px 15px 0 !important;
 			position: relative;
 			z-index: 20;
 		}
 		#menu {
-			.topLinks {
+			.toplinks {
 				margin: 0;
-				padding: 18px;
+				padding: 35px 18px;
 			}
 			li {
-				display: inline-block;
-				margin-right: 0;
+				display: inline-block !important;
+				margin-right: 0 !important;
 				width: 50%;
 				float: left;
 				margin-bottom: 5px;
 			}
 		}
 		.topSearchBox {
-			width: 280px;
-			margin-left: -140px;
-			top: 65px;
+			width: 280px !important;
+			margin-left: -140px !important;
+			top: 55px !important;
 			z-index: 10;
 			input {
-				padding: 5px 10px;
+				padding: 5px 10px !important;
 			}
 		}
 	}
