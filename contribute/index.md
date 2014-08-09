@@ -25,8 +25,10 @@ tasks you'll need to do.
 4. Commit and push your changes to your repo
 5. Make a pull request of your changes, against the [KDLearn Repo][repo]
 
-If you need more details
+If you need more in depth instructions than that, please continue with 
+this series below. Thanks!
 
 
 
-[guidelines]: guidelines
+[guidelines]:  guidelines
+[repo]:        https://github.com/koding/kdlearn
