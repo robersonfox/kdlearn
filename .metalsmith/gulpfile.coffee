@@ -158,8 +158,10 @@ gulp.task 'vendor', ['vendor:js']
 gulp.task 'watch', ['watch:md']
 gulp.task 'watch:all', ['watch:md', 'watch:code', 'watch:sass']
 gulp.task 'build', [
-  'metalsmith',
+  'metalsmith:minify'
   'sass',
   'client', 'vendor'
-  'static', 'staticDocuments']
+  'static', 'staticDocuments'
+  ]
+
 gulp.task 'default', ['build']
