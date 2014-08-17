@@ -46,7 +46,11 @@ paths =
     'static/**/*'
     ]
   vendor:
-    css: 'vendor/css/**/*.css'
+    css: [
+      'vendor/css/**/*.css'
+      'vendor/sass/**/*.scss'
+      'vendor/sass/**/*.sass'
+      ]
     js: 'vendor/js/**/*.js'
 
 
@@ -129,9 +133,11 @@ gulp.task 'vendor:js', ->
 
 # ## vendor:css
 #
-# Minify all the plain vendor css.
+# Minify all the vendor css and sass. Note that the `sass()` plugin
+# only cares about sass files.
 gulp.task 'vendor:css', ->
   gulp.src paths.vendor.css
+    .pipe sass()
     .pipe minifyCss()
     .pipe concat 'vendor.css'
     .pipe gulp.dest 'build/css'
