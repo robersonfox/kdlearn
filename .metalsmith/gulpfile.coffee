@@ -13,6 +13,7 @@ connect    = require 'connect'
 gulp       = require 'gulp'
 coffee     = require 'gulp-coffee'
 concat     = require 'gulp-concat'
+minifyCss  = require 'gulp-minify-css'
 minifyHtml = require 'gulp-minify-html'
 sass       = require 'gulp-sass'
 uglify     = require 'gulp-uglify'
@@ -44,9 +45,9 @@ paths =
     '!static/**/*.coffee'
     'static/**/*'
     ]
-  vendor: js: [
-    'vendor/js/**/*.js'
-    ]
+  vendor:
+    css: 'vendor/css/**/*.css'
+    js: 'vendor/js/**/*.js'
 
 
 # ## client:coffee
@@ -95,6 +96,7 @@ gulp.task 'preview', ['build'], ->
 gulp.task 'sass', ->
   gulp.src paths.sass
     .pipe sass()
+    .pipe minifyCss()
     .pipe gulp.dest 'build/css'
 
 
@@ -125,6 +127,16 @@ gulp.task 'vendor:js', ->
     .pipe gulp.dest 'build/js'
 
 
+# ## vendor:css
+#
+# Minify all the plain vendor css.
+gulp.task 'vendor:css', ->
+  gulp.src paths.vendor.css
+    .pipe minifyCss()
+    .pipe concat 'vendor.css'
+    .pipe gulp.dest 'build/css'
+
+
 # ## watch:code
 #
 # Watch the metalsmith code and reload it when changes are detected.
@@ -152,14 +164,14 @@ gulp.task 'watch:sass', ['sass'], ->
   gulp.watch paths.sass, ['sass']
 
 
-gulp.task 'client', ['client:coffee']
-gulp.task 'vendor', ['vendor:js']
+gulp.task 'client', ['client:coffee', 'sass']
+gulp.task 'vendor', ['vendor:js', 'vendor:css']
+
 
 gulp.task 'watch', ['watch:md']
 gulp.task 'watch:all', ['watch:md', 'watch:code', 'watch:sass']
 gulp.task 'build', [
   'metalsmith:minify'
-  'sass',
   'client', 'vendor'
   'static', 'staticDocuments'
   ]
