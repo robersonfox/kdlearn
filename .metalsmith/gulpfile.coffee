@@ -7,13 +7,17 @@
 #
 # Run with `cult`, and see README.md for more usage docs.
 #
-metal   = require './metal'
-path    = require 'path'
-connect = require 'connect'
-gulp    = require 'gulp'
-coffee  = require 'gulp-coffee'
-sass    = require 'gulp-sass'
-util    = require 'gulp-util'
+metal      = require './metal'
+path       = require 'path'
+connect    = require 'connect'
+gulp       = require 'gulp'
+coffee     = require 'gulp-coffee'
+concat     = require 'gulp-concat'
+minifyCss  = require 'gulp-minify-css'
+minifyHtml = require 'gulp-minify-html'
+sass       = require 'gulp-sass'
+uglify     = require 'gulp-uglify'
+util       = require 'gulp-util'
 
 
 
@@ -27,7 +31,6 @@ paths =
     'static/**'
     'templates/**'
   ]
-  coffee: 'static/**/*.coffee'
   documents: [
     '!**'
     '../**/*.md'
@@ -42,21 +45,43 @@ paths =
     '!static/**/*.coffee'
     'static/**/*'
     ]
+  vendor:
+    css: [
+      'vendor/css/**/*.css'
+      'vendor/sass/**/*.scss'
+      'vendor/sass/**/*.sass'
+      ]
+    js: 'vendor/js/**/*.js'
 
 
-# ## coffee
+# ## client:coffee
 #
 # Compile coffee found in the static dir.
-gulp.task 'coffee', ->
-  gulp.src paths.coffee
+gulp.task 'client:coffee', ->
+  gulp.src 'client/**/*.coffee'
     .pipe coffee()
-    .pipe gulp.dest 'build'
+    .pipe uglify()
+    .pipe concat 'main.js'
+    .pipe gulp.dest 'build/js'
 
 
 # ## metalsmith
 #
 # Compile our metalsmith markdown and templates.
-gulp.task 'metalsmith', -> metal()
+gulp.task 'metalsmith', (callback) -> metal callback
+
+
+## metalsmith:minify
+#
+# Minify html in the build directory.
+#
+# Note: This is a "hack" until i can find a clear
+# metalsmith->gulp pipe solution. When that happens, we'll
+# just pipe straight from metalsmith into gulp-minify-html.
+gulp.task 'metalsmith:minify', ['metalsmith'], ->
+  gulp.src 'build/**/*.html'
+    .pipe minifyHtml()
+    .pipe gulp.dest 'build'
 
 
 # ## preview
@@ -75,6 +100,7 @@ gulp.task 'preview', ['build'], ->
 gulp.task 'sass', ->
   gulp.src paths.sass
     .pipe sass()
+    .pipe minifyCss()
     .pipe gulp.dest 'build/css'
 
 
@@ -92,6 +118,29 @@ gulp.task 'static', ->
 gulp.task 'staticDocuments', ->
   gulp.src paths.staticDocuments
     .pipe gulp.dest 'build'
+
+
+# ## vendor:js
+#
+# Uglify all of the vendor files and concatenate them into a
+# single file.
+gulp.task 'vendor:js', ->
+  gulp.src paths.vendor.js
+    .pipe uglify()
+    .pipe concat 'vendor.js'
+    .pipe gulp.dest 'build/js'
+
+
+# ## vendor:css
+#
+# Minify all the vendor css and sass. Note that the `sass()` plugin
+# only cares about sass files.
+gulp.task 'vendor:css', ->
+  gulp.src paths.vendor.css
+    .pipe sass()
+    .pipe minifyCss()
+    .pipe concat 'vendor.css'
+    .pipe gulp.dest 'build/css'
 
 
 # ## watch:code
@@ -121,7 +170,16 @@ gulp.task 'watch:sass', ['sass'], ->
   gulp.watch paths.sass, ['sass']
 
 
+gulp.task 'client', ['client:coffee', 'sass']
+gulp.task 'vendor', ['vendor:js', 'vendor:css']
+
+
 gulp.task 'watch', ['watch:md']
 gulp.task 'watch:all', ['watch:md', 'watch:code', 'watch:sass']
-gulp.task 'build', ['metalsmith', 'sass', 'static', 'staticDocuments', 'coffee']
+gulp.task 'build', [
+  'metalsmith:minify'
+  'client', 'vendor'
+  'static', 'staticDocuments'
+  ]
+
 gulp.task 'default', ['build']
