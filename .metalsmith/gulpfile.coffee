@@ -170,8 +170,8 @@ gulp.task 'watch:sass', ['sass'], ->
   gulp.watch paths.sass, ['sass']
 
 
-gulp.task 'client', ['client:coffee', 'sass']
-gulp.task 'vendor', ['vendor:js', 'vendor:css']
+gulp.task 'client', ['client:coffee']
+gulp.task 'vendor', ['vendor:css', 'vendor:js']
 
 
 gulp.task 'watch', ['watch:md']
@@ -179,6 +179,7 @@ gulp.task 'watch:all', ['watch:md', 'watch:code', 'watch:sass']
 gulp.task 'build', [
   'metalsmith:minify'
   'client', 'vendor'
+  'sass',
   'static', 'staticDocuments'
   ]
 
