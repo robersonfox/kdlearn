@@ -5,7 +5,7 @@
 #
 path         = require 'path'
 highlightjs  = require 'highlight.js'
-marked = require 'marked'
+marked       = require 'marked'
 metalsmith   = require 'metalsmith'
 collections  = require 'metalsmith-collections'
 excerpts     = require 'metalsmith-excerpts'
@@ -14,6 +14,7 @@ markdown     = require 'metalsmith-markdown'
 metadata     = require 'metalsmith-metadata'
 permalinks   = require 'metalsmith-permalinks'
 templates    = require 'metalsmith-templates'
+apiGen       = require './plugins/api-gen'
 authors      = require './plugins/authors'
 defaultMeta  = require './plugins/defaultmeta'
 descMeta     = require './plugins/descriptionMeta'
@@ -163,6 +164,7 @@ module.exports = build = (callback=->) ->
       output: 'sitemap.xml'
       metadata: template: 'sitemap.toffee'
     .use templates 'toffee'
+    .use apiGen()
     .build callback
 
 
