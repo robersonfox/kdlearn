@@ -5,7 +5,7 @@
 #
 path         = require 'path'
 highlightjs  = require 'highlight.js'
-marked = require 'marked'
+marked       = require 'marked'
 metalsmith   = require 'metalsmith'
 collections  = require 'metalsmith-collections'
 excerpts     = require 'metalsmith-excerpts'
@@ -14,6 +14,8 @@ markdown     = require 'metalsmith-markdown'
 metadata     = require 'metalsmith-metadata'
 permalinks   = require 'metalsmith-permalinks'
 templates    = require 'metalsmith-templates'
+apiGen       = require './plugins/api-gen'
+aboutSchema  = require './plugins/about-schema'
 authors      = require './plugins/authors'
 defaultMeta  = require './plugins/defaultmeta'
 descMeta     = require './plugins/descriptionMeta'
@@ -101,10 +103,14 @@ module.exports = build = (callback=->) ->
         reverse: true
     .use defaultMeta
       collection: 'faq'
-      metadata: template: 'faq.toffee'
+      metadata:
+        improvable: true
+        template: 'faq.toffee'
     .use defaultMeta
       collection: 'guide'
-      metadata: template: 'page.toffee'
+      metadata:
+        improvable: true
+        template: 'page.toffee'
     .use tags
       metaKey: 'categories'
       sort: 'date'
@@ -146,6 +152,7 @@ module.exports = build = (callback=->) ->
     .use descMeta() # Add Description Metatag to each Document
     .use permalinks()
     .use filename()
+    .use aboutSchema() # Add itemprop='about' to the first para
     .use descMeta() # Add Description Metatag to each Document
     # Adding the scripts array to all the pages, means that you can
     # Append the script array with some code, and not worry about the
@@ -164,6 +171,7 @@ module.exports = build = (callback=->) ->
       output: 'sitemap.xml'
       metadata: template: 'sitemap.toffee'
     .use templates 'toffee'
+    .use apiGen()
     .build callback
 
 
