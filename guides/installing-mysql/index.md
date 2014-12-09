@@ -70,6 +70,8 @@ This can be done with the following command.
 sudo service apache2 restart
 ```
 
+Now you may want install PHPMyAdmin (http://learn.koding.com/guides/install-phpmyadmin/)
+
 That's it!
 
 
